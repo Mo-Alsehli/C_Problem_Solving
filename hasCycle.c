@@ -2,6 +2,12 @@
 #include <stdio.h>
 
 /*
+Problem Description:
+Given head, the head of a linked list, determine if the linked list has a cycle in it.
+There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
+Return true if there is a cycle in the linked list. Otherwise, return false.
+
+Solution:
 To determine if a linked list has a cycle, you can use the Floyd's cycle-finding algorithm, also known as the "tortoise and hare" algorithm. The idea is to have two pointers, one moving at a slower pace (tortoise) and another moving at a faster pace (hare). If there is a cycle in the linked list, eventually the hare will catch up to the tortoise.
 */
 
