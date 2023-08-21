@@ -34,6 +34,7 @@ void moveZeros(int nums[], int numsSize)
             nums[nonZeroIndex] = nums[i];
 
             // If the current index is different from the nonZeroIndex, set the current index to zero
+
             if (i != nonZeroIndex)
             {
                 nums[i] = 0;
@@ -41,6 +42,7 @@ void moveZeros(int nums[], int numsSize)
 
             nonZeroIndex++;
         }
+        printf("i = %d, nonZeroIndex = %d\n", i, nonZeroIndex);
     }
 }
 
