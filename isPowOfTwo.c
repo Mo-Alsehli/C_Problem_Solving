@@ -6,7 +6,7 @@ An integer n is a power of two, if there exists an integer x such that n == 2x.
 LeetCode: https://leetcode.com/problems/power-of-two
 
 Solution:
-- To check if an integer n is a power of two, we can use bitwise operations. A power of two in binary form has only one bit set to 1, and all other bits are 0. So, if n is a power of two, it should satisfy the condition n & (n - 1) == 0.
+- To check if an integer n is a power of two, we can use bitwise operations. A power of two in binary form "has only one bit set to 1", and all other bits are 0. So, if n is a power of two, it should satisfy the condition n & (n - 1) == 0.
 - Now, let's analyze the condition n & (n - 1) == 0 in the isPowerOfTwo function:
 
 For n equal to 1:
