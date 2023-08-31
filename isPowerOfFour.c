@@ -19,9 +19,6 @@ Leetcode: https://leetcode.com/problems/power-of-four/description/
 Solution:
 - First we check if there is one bit that is set in the number (number is power of two).
 - Then we check if this bit is in a positive position in the number.
-
-
-
 */
 
 int isPowerOfFour(int n)
