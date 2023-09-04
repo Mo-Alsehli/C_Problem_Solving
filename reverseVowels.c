@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <ctype.h> // For isalpha
+#include <string.h>
 
 /*
 -- Description:
