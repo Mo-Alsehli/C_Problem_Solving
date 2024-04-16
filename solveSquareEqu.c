@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <math.h> // for sqrt function
 
-int *sovleSqrtEqu(int a, int b, int c)
+int sovleSqrtEqu(int *res, int a, int b, int c)
 {
     int discriminant, root1, root2;
-    int res[2] = {0};
     // Check for division by zero (avoid if a is zero)
     if (a == 0)
     {
@@ -26,7 +25,7 @@ int *sovleSqrtEqu(int a, int b, int c)
 
         res[0] = root1;
         res[1] = root2;
-        return res;
+        return 2;
     }
     else if (discriminant == 0)
     {
@@ -37,7 +36,7 @@ int *sovleSqrtEqu(int a, int b, int c)
 
         res[0] = root1;
         res[1] = root2;
-        return res;
+        return 3;
     }
     else
     {
@@ -102,6 +101,9 @@ int main()
         printf("x1 = %.2lf + %.2lfi\n", realPart, imaginaryPart);
         printf("x2 = %.2lf - %.2lfi\n", realPart, imaginaryPart);
     }
+    float num = 1.0;
+
+    printf("\n\n%d", (int)num == 1);
 
     return 0;
 }
