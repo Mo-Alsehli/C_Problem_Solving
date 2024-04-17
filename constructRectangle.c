@@ -1,74 +1,65 @@
-/**
- * Note: The returned array must be malloced, assume caller calls free().
- */
+/*
+-- Description:
+A web developer needs to know how to design a web page's size. So, given a specific rectangular web page’s area, your job by now is to design a rectangular web page, whose length L and width W satisfy the following requirements:
 
-#include <math.h> // for sqrt function
+The area of the rectangular web page you designed must equal to the given target area.
+The width W should not be larger than the length L, which means L >= W.
+The difference between length L and width W should be as small as possible.
+Return an array [L, W] where L and W are the length and width of the web page you designed in sequence.
 
-int sovleSqrtEqu(float *res, int a, int b, int c)
+Example 1:
+Input: area = 4
+Output: [2,2]
+Explanation: The target area is 4, and all the possible ways to construct it are [1,4], [2,2], [4,1].
+But according to requirement 2, [1,4] is illegal; according to requirement 3,  [4,1] is not optimal compared to [2,2]. So the length L is 2, and the width W is 2.
+Example 2:
+Input: area = 122122
+Output: [427,286]
+
+-- LeetCode: https://leetcode.com/problems/construct-the-rectangle/description/
+
+-- Solution:
+This function first calculates the square root of the given area to reduce the search space. Then, it iterates backward from the square root to find the factors of the area. It checks if the current factor divides the area evenly and assigns the corresponding length and width accordingly. Finally, it returns an array containing the length and width.
+
+-- Time Complexity: O(sqrt(n))
+-- Space Complexity: O(1)
+
+
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int *constructRectangle(int area, int *returnSize);
+
+int main()
 {
-    double discriminant, root1, root2;
-    // Check for division by zero (avoid if a is zero)
-    if (a == 0)
-    {
-        printf("Error: a cannot be zero.\n");
-        return 1;
-    }
+    int area = 122122;
+    int returnSize;
+    int *result = constructRectangle(area, &returnSize);
 
-    // Calculate the discriminant
-    discriminant = b * b - 4 * a * c;
+    printf("Output: [%d, %d]\n", result[0], result[1]);
 
-    if (discriminant > 0)
-    {
-        // Two real and distinct roots
-        root1 = (-b + sqrt(discriminant)) / (2 * a);
-        root2 = (-b - sqrt(discriminant)) / (2 * a);
-        printf("Roots are real and distinct:\n");
-        printf("x1 = %.2lf\n", root1);
-        printf("x2 = %.2lf\n", root2);
-
-        res[0] = root1;
-        res[1] = root2;
-        return 2;
-    }
-    else if (discriminant == 0)
-    {
-        // Two real and equal roots
-        root1 = root2 = -b / (2 * a);
-        printf("Roots are real and equal:\n");
-        printf("x1 = x2 = %.2lf\n", root1);
-
-        res[0] = root1;
-        res[1] = root2;
-        return 3;
-    }
-    else
-    {
-        // Two complex roots
-        double realPart = -b / (2 * a);
-        double imaginaryPart = sqrt(-discriminant) / (2 * a);
-        printf("Roots are complex:\n");
-        printf("x1 = %.2lf + %.2lfi\n", realPart, imaginaryPart);
-        printf("x2 = %.2lf - %.2lfi\n", realPart, imaginaryPart);
-    }
+    free(result); // Freeing the memory allocated by constructRectangle
 
     return 0;
 }
+
 int *constructRectangle(int area, int *returnSize)
 {
-    float res1[2] = {0.0};
-    int res[2] = {0};
-    int i = 0;
-    // In this problem we will sove the equation: L^2 - (L-W)L - area = 0.
-    // The general equation is in the form: aL^2 - bL - c = 0.
+    *returnSize = 2;
+    int *result = (int *)malloc(2 * sizeof(int));
 
-    int a = 1, b = 0, c = -area;
-
-    do
+    int width = 1;
+    while (width * width <= area)
     {
-        sovleSqrtEqu(res1, a, b, c);
-        b++;
-        printf("res[0] = %.2f, res[1] = %.2f\n", res1[0], res1[1]);
-    } while (!(((int)(res1[0]) == res1[0] && res1[0] > 0) || ((int)(res1[1]) == res1[1] && res1[1] > 0)));
+        if (area % width == 0)
+        {
+            result[0] = area / width;
+            result[1] = width;
+        }
+        width++;
+    }
 
-    return res;
+    return result;
 }
