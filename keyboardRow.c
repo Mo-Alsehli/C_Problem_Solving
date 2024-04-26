@@ -1,7 +1,14 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
+
 /*
+Auther: Mohamed Magdi
+Date: April 26 2024
+
 -- Description:
 Given an array of strings words, return the words that can be typed using letters of the alphabet on only one row of American keyboard like the image below.
-
 In the American keyboard:
 the first row consists of the characters "qwertyuiop",
 the second row consists of the characters "asdfghjkl", and
@@ -11,46 +18,83 @@ Example 1:
 Input: words = ["Hello","Alaska","Dad","Peace"]
 Output: ["Alaska","Dad"]
 
- */
+Example 2:
+Input: words = ["omk"]
+Output: []
 
-/**
- * Note: The returned array must be malloced, assume caller calls free().
- */
+Example 3:
+Input: words = ["adsdf","sfd"]
+Output: ["adsdf","sfd"]
 
-int cmpfunc(const void *a, const void *b)
+-- LeetCode: https://leetcode.com/problems/keyboard-row/description/
+
+-- Solution:
+To solve this problem, we can create a dictionary mapping each letter to its corresponding row on the keyboard. Then, for each word in the input array, we check if all its letters belong to the same row. If so, we add the word to the result list.
+
+-- Complexity
+Time complexity: O (M . K) -> Where M word array Length and K maximum length of word.
+Space complexity: O(M).
+*/
+
+bool canTypeInOneRow(char *word)
 {
-    return (*(int *)a - *(int *)b);
+    char *rows[] = {"qwertyuiopQWERTYUIOP", "asdfghjklASDFGHJKL", "zxcvbnmZXCVBNM"};
+    int rowIdx = -1;
+
+    for (int i = 0; i < 3; i++)
+    {
+        if (strchr(rows[i], word[0]))
+        {
+            rowIdx = i;
+            break;
+        }
+    }
+
+    for (int i = 1; i < strlen(word); i++)
+    {
+        if (!strchr(rows[rowIdx], word[i]))
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 char **findWords(char **words, int wordsSize, int *returnSize)
 {
-    char **rowChars = {"qwertyuiop", "asdfghjkl", "zxcvbnm"};
-    int i, maxSize = 0, j;
-    qsort(rowChars[0], 10, sizeof(char), cmpfunc);
-    qsort(rowChars[1], 9, sizeof(char), cmpfunc);
+    char **result = (char **)malloc(wordsSize * sizeof(char *));
+    *returnSize = 0;
 
-    for (i = 0; i < wordsSize; i++)
+    for (int i = 0; i < wordsSize; i++)
     {
-        int wordSize = sizeof(words[i]) / sizeof(char);
-        qsort(words[i], wordSize, sizeof(char), cmpfunc);
-        maxSize = wordSize > maxSize ? wordSize : maxSize;
-    }
-
-    char **res = (char **)malloc(wordsSize * sizeof(char *));
-
-    for (i = 0; i < wordsSize; i++)
-    {
-        res[i] = (char *)malloc(maxSize * sizeof(char));
-    }
-
-    for (i = 0; i < wordsSize; i++)
-    {
-        int size = sizeof(words[i]) / sizeof(char);
-        for (j = 0; j < size; j++)
+        if (canTypeInOneRow(words[i]))
         {
-            if (words[i][j] == rowChars[0])
-            {
-            }
+            result[(*returnSize)++] = words[i];
         }
     }
+
+    return result;
+}
+
+int main()
+{
+    char *words[] = {"Hello", "Alaska", "Dad", "Peace"};
+    int wordsSize = sizeof(words) / sizeof(words[0]);
+    int returnSize;
+    char **result = findWords(words, wordsSize, &returnSize);
+
+    printf("Output: [");
+    for (int i = 0; i < returnSize; i++)
+    {
+        printf("%s", result[i]);
+        if (i < returnSize - 1)
+        {
+            printf(", ");
+        }
+    }
+    printf("]\n");
+
+    free(result);
+    return 0;
 }
