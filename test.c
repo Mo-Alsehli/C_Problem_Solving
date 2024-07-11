@@ -1,15 +1,21 @@
-#include "stdio.h"
-#include "stdint.h"
-
+#include <stdio.h>
+void solve()
+{
+    int first = 10, second = 20;
+    int third = first + second;
+    {
+        int third = second - first;
+        printf("%d ", third);
+    }
+    printf("%d", third);
+}
+#include <stdio.h>
 int main()
 {
-    float diff = 781000;
-    uint32_t distanceDiff = 100;
+    int arr[] = {10, 20, 30, 40};
+    int *ptr = arr;
 
-    float res = distanceDiff / (diff / 1000000);
-    res = 0;
+    *(ptr++) += 123;
 
-    printf("res: %f\n", res);
-
-    return 0;
+    printf("%d %d", *ptr, *(ptr + 1));
 }
