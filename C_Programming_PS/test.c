@@ -1,21 +1,12 @@
 #include <stdio.h>
-void solve()
-{
-    int first = 10, second = 20;
-    int third = first + second;
-    {
-        int third = second - first;
-        printf("%d ", third);
-    }
-    printf("%d", third);
-}
-#include <stdio.h>
+#include <stdlib.h>
+#define F abc
+#define B def
+#define FB(arg) #arg
+#define FB1(arg) FB(arg)
 int main()
 {
-    int arr[] = {10, 20, 30, 40};
-    int *ptr = arr;
-
-    *(ptr++) += 123;
-
-    printf("%d %d", *ptr, *(ptr + 1));
+    int a = 1, b = 2, c = 3, d;
+    d = (a = c, b += a, c = a + b + c);
+    printf("%d %d %d %d\n", d, a, b, c);
 }

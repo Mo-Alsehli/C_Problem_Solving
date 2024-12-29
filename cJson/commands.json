@@ -1,0 +1,11 @@
+[
+  { "command": "ENA", "nodeID": "0x50" },
+  { "command": "ENA", "nodeID": "0x80" },
+  { "command": "ENA", "nodeID": "0x81" },
+  { "command": "STA", "nodeID": "0x50" },
+  { "command": "ACT", "nodeID": "0x50", "data": "1" },
+  { "command": "STA", "nodeID": "0x50" },
+  { "command": "STA", "nodeID": "0x80" },
+  { "command": "STA", "nodeID": "0x81" },
+  { "command": "STA", "nodeID": "0x50" }
+]
