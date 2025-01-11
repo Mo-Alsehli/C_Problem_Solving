@@ -5,5 +5,9 @@
     "xstring": "cpp",
     "unordered_map": "cpp",
     "ostream": "cpp"
+  },
+  "github.copilot.advanced": {},
+  "github.copilot.enable": {
+    "*": false
   }
 }
